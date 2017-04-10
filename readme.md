@@ -40,7 +40,7 @@ Step3. grunt default
 step4. When grunt tasks finished, just refresh the browser to check main.html
 
 
-Note: if you hit the error like "Phantomjs not found", please try to 
+Note: if you hit the error like "Phantomjs not found" when run "npm install", please try 
 
 	1. npm uinstall phantomjs
 	2. npm install phantomjs -g
