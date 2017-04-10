@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Cruise Practice</title>
+
+    <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="cruise-page">
+    <div class="container">
+        <div class="utility">
+          <div>
+            <span class="login">Signed in as <a href="#" class="member-link">Member</a></span> 
+            <a class="logout"><i class="glyphicon glyphicon-arrow-right"></i>Sign out</a>
+          </div>
+        </div>
+        <div class="content row">
+          <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="tab-title" >Cruise</li>
+              <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab" data-name="help">Help</a></li>
+              <li role="presentation" class="active"><a href="#agents" aria-controls="agents" role="tab" data-toggle="tab" data-name="agents">Agents</a></li>
+              <li role="presentation"><a href="#mycruise" aria-controls="mycruise" role="tab" data-toggle="tab"
+              data-name="mycruise">My Cruise</a></li>
+              <li role="presentation"><a href="#dashboard" aria-controls="dashboard" role="tab" data-toggle="tab" data-name="dashboard">Dashboard</a></li>
+            </ul>
+            <div class="menu-list">
+              <span class="menu-title">Agents</span>
+              <div class="button" id="all_btn" data-filter="all">All</div>
+              <div class="button active" id="physical_btn" data-filter="physical">Physical</div>
+              <div class="button" id="Virtual_btn" data-filter="virtual">Virtual</div>
+            </div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane" id="dashboard">
+                <div class="main-wrapper">
+
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="mycruise">
+                <div class="main-wrapper">
+
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane active" id="agents">
+                <div class="main-wrapper">
+                  <div class="left-pane">
+                    <script id="item_tpl" type="text/x-handlebars-template">
+                      {{#each list}}
+                      <li class="list-item {{#if isDeny}} deny {{/if}}" id="_item{{@index}}" data-filter-value="{{filterType}}" data-status="{{infor.status}}">
+                        <div class='cruise-child'>
+                          <div class="infor-img"><img src="{{img}}" class="img-responsive"></div>
+                          <div class="infor">
+                              <div>
+                                <span class="name">{{infor.name}}</span>
+                                <div class="seperator"></div>
+                                <span class="type">{{infor.status}}</span>
+                                <div class="seperator"></div>
+                                <span class="ipaddress">{{infor.ipaddress}}</span>
+                                <div class="seperator"></div>
+                                <span class="path">{{infor.path}}</span>
+                              </div>
+                              <div>
+                                <span>
+                                  <i class="glyphicon glyphicon-plus"></i>
+                                  <a class="spe-resours">Specify Resources</a>
+                                  <div class="seperator"></div>
+                                </span>
+                                <span>Resources:</span>
+                                <div class="resources-list">
+                                  <div class="source"><span>ubuntu</span><i class="glyphicon glyphicon-remove"></i></div>
+                                </div>
+                                {{#if isDeny}}
+                                <a class="deny"><i class="glyphicon glyphicon-ban-circle"></i><label class="text">Deny</label></a>
+                              </div>
+                                {{/if}}
+                          </div>
+                        </div>
+                      </li>
+                      {{/each}}
+                    </script>
+                    <ul class="infor-container">
+                      <!-- <li class="list-item deny">
+                        <div class='cruise-child'>
+                          <div class="infor-img"><img src="" class="img-responsive"></div>
+                          <div class="infor">
+                              <div>
+                                <span class="name">bjstdmngbgr02.thoughtworks.com</span>
+                                <div class="seperator"></div>
+                                <span class="type">idle</span>
+                                <div class="seperator"></div>
+                                <span class="ipaddress">192.168.1.2</span>
+                                <div class="seperator"></div>
+                                <span class="path">/var/lib/cruise-agent</span>
+                              </div>
+                              <div>
+                                <span>
+                                  <i class="glyphicon glyphicon-plus"></i>
+                                  <a class="spe-resours" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Specify Resources</a>
+                                  <div class="seperator"></div>
+                                </span>
+                                <span>Resources:</span>
+                                <div class="resources-list">
+                                  <div class="source"><span>ubuntu</span><i class="glyphicon glyphicon-remove"></i></div>
+                                </div>
+                                <a class="deny"><i class="glyphicon glyphicon-ban-circle"></i><label class="text">Deny</label></a>
+                              </div>
+                          </div>
+                        </div>
+                      </li> -->
+                    </ul>
+                  </div>
+                  <div class="right-pane">
+                    <h4>Summary</h4>
+                    <div class="summary-item building row">
+                      <div class="type">building</div>
+                      <div class="account">0</div>
+                    </div>
+                    <div class="summary-item idle row">
+                      <div class="type">idle</div>
+                      <div class="account">0</div>
+                    </div>
+                    <h4>History</h4>
+                    <ul class="History-list">
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                      <li>bjstdmngbr02/Acceptance_test</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="help">
+                <div class="main-wrapper">
+
+                </div>
+              </div>
+            </div>
+            
+            <div class="common-specify-container" data-belongs = ''>
+              <form action id="inputForm">
+                <div class="message">(separate multiple resources name with commas)</div>
+                <p class="error-panel"></p>
+                <input type="text" name="inputBox" class="input-box" required>
+                <div class="button-groups">
+                  <button class="button add-btn">Add resources</button>
+                  <button class="button close-btn">close</button>
+                </div>
+              </form>
+              <div class="triangle-top"></div>
+            </div>
+          </div>
+        </div>
+        <div class="overlay"></div>
+        <div class="modal fade" tabindex="-1" role="dialog" id="waring_modal">
+          <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Confirm</h4>
+              </div>
+              <div class="modal-body">
+              <p>Are you sure you want to remove current resource?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary yes-btn">OK</button>
+                <button type="button" class="btn btn-default close-btn" data-dismiss="modal">Cancel</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script> -->
+    <script data-main="src/main.js" src="scripts/require.js"></script>
+  </body>
+</html>
